@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% load categorias %}
+{% load widget_tweaks %} {% block head %}
+<title>Jaguarete KAA - Usuario deslogueado</title>
+{% endblock %} {% block body %}
+<div class="container justify-content-center col-lg-5 align-items-center"> 
+    <div class="my-5">
+        <h1 class="text-center">Saliste del sistema!</h1>
+  
+        {% if request.user.is_authenticated %}
+        {% else %}
+    
+            <div class="my-5 text-center">
+            <h5 class="mb-1">Volver al</h5>
+            <a href="{% url 'store:login' %}" class="btn btn-success btn-rounded mt-4">Log in</a>
+        {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+    
+{% endblock %}

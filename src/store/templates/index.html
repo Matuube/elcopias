@@ -1,0 +1,57 @@
+{% extends "template.html" %}
+{% load categorias %}
+{% load static %} {% block head %}
+<title>Jaguarete KAA - Index</title>
+{% endblock %} {% block body %}
+
+<h1 class="text-center mb-5 mt-3">
+  Estos son los últimos productos agregados
+</h1>
+
+<!-- 3 items card group -->
+<div class="card-group">
+  
+  <!-- Need to make 3 cards to show latest added products -->
+    {% for producto in tres_productos %}
+  
+  <div class="card mx-2">
+    <a href="{% url 'store:producto' pk=producto.id %}">
+    <img style="width: 100%;
+      height: 15vw;
+      object-fit: scale-down;" src="{{producto.imagen.url}}" class="card-img-top text-center" alt="..." />
+    </a>
+    <div class="card-body text-center">
+      <a href="{% url 'store:producto' pk=producto.id %}">
+      <h5 class="card-title">{{producto.titulo}}</h5>
+    </a>
+      <p class="card-text">
+        {{producto.detalle}}
+      </p>
+      <p class="card-text">
+        Precio: ${{producto.precio}} ARS
+      </p>
+      <p class="card-text">
+        <small class="text-muted">{{producto.fecha_creacion}}</small>
+      </p>
+      <button type="submit" class="btn btn-success"><a class="text-white" href="{% url 'store:producto' pk=producto.id %}"> Más información</a></button>
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+
+<!-- 7 items list -->
+
+
+<div class="list-group mt-4 mb-5">
+  <h4>Otros productos que pueden interesarle</h4>
+  
+  {% for producto in siete_productos %}
+  <a href="{% url 'store:producto' pk=producto.id %}" class="list-group-item list-group-item-action">
+    {{producto.titulo}}
+  </a>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

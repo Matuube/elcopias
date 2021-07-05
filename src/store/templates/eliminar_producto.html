@@ -1,0 +1,19 @@
+{% extends "template.html" %}
+{% load categorias %}
+{% load widget_tweaks %}{% load static %} {% block head %}
+<title>Jaguarete KAA - Eliminar producto</title>
+{% endblock %} {% block body %}
+<div class="container justify-content-center col-lg-5 align-items-center">
+    <div class="my-5 text-center">
+        <h1 class="text-center mb-5">Eliminar producto</h1>
+        <form class="align-items-center mx-5 text-center" method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <p >Seguro que quiere eliminar este producto: "{{ object }}"?</p>
+            <input type="submit" value="Confirmar" class="btn btn-primary text-center">
+        </form>
+        <br>
+        <p>O bien, </p>
+        <a href="{% url 'store:index' %}" class="text-center">Regresar al Home</a>
+    </div>
+</div>
+{% endblock %}

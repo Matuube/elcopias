@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+{% load categorias %}
+{% load widget_tweaks %}
+{% block head %}
+<title>Jaguarete KAA - Producto Actualizado</title>
+{% endblock %} {% block body %}
+
+<div class="my-5 text-center">
+    <h1 class="text-center">Ya se modificó el producto!</h1>
+
+    
+    <h5 class="mb-1">Volver al</h5>
+            <a href="{% url 'store:index' %}" class="btn btn-success btn-rounded mt-4">Home</a>
+    
+    
+    </div>
+{% endblock %}

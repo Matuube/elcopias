@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% load categorias %}
+{% load static %} {% block head %}
+<title>Jaguarete KAA - Búsqueda por categoría</title>
+{% endblock %} {% block body %}
+
+<h1 class="text-center mb-5">Jaguarete KAA - Búsqueda</h1>
+
+<!-- search results, probably add a for loop through all queries. -->
+<div class="list-group mt-3">
+  {% for producto in object_list %}
+  <a href="{% url 'store:producto' pk=producto.id%}" class="list-group-item list-group-item-action">
+    {{ producto.titulo}}
+  </a>
+  {% empty %}
+  <p class="text-center">
+    Perdona, no encontramos lo que buscabas, puedes probar de nuevo si lo deseas.
+</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

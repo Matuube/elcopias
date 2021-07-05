@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% load categorias %}
+{% load static %} {% block head %}
+<title>Jaguarete KAA - Nuevo Producto Agregado</title>
+{% endblock %} {% block body %}
+
+<div class="my-5 text-center">
+    <h1 class="text-center mb-5">Nuevo producto agregado correctamente!</h1>
+
+
+    <h5 class="mb-1">Volver al</h5>
+    <a href="{% url 'store:index' %}" class="btn btn-success btn-rounded mt-4">Home</a>
+</div>
+{% endblock %}

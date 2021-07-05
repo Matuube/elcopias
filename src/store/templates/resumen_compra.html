@@ -1,0 +1,87 @@
+{% extends 'template.html' %}
+{% load categorias %}
+{% block head %}
+<title>Jaguarete KAA - Carrito</title>
+{% endblock %}
+
+{% block body %}
+    <div class= "container">
+        <div class="">
+    <h3 class="mb-3">
+        <strong>Su carrito de compras, {{request.user.first_name}}</strong>
+    </h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto: </th>
+            <th scope="col">Precio: </th>
+            <th scope="col">Cantidad: </th>
+            <th scope="col">Total: </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in objeto.productos.all %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ item.producto.titulo }}</td>
+            <td>
+                ${{ item.producto.precio}}
+            
+            </td>
+            <td>
+                <a href="{% url 'store:reducir_cantidad_producto' pk=item.producto.id%}"><i class="fas fa-minus mr-3"></i></a>
+
+                <span class="mx-2"><b>{{ item.cantidad }}</b></span>
+
+                <a href="{% url 'store:agregar_al_carrito' pk=item.producto.id %}"><i class="fas fa-plus ml-4"></i></a>
+            </td>
+            <td>
+                ${{ item.precio_total_producto}}
+            </td>
+            <td>
+             <span class="badge bg-danger"><a class="text-white" href="{% url 'store:quitar_del_carrito' pk=item.producto.id %}">
+                Eliminar producto
+             </a></span>
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="5">Vacío</td>
+        </tr>
+
+         <tr>
+            <td colspan="5">
+                <a href="/" class="btn btn-primary float-right">Siga comprando</a>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        {% if objeto.precio_total_carrito %}
+        <tr>
+            <td colspan="4"><b>Precio total</b></td>
+            <td><b>${{ objeto.precio_total_carrito }}</b></td>
+        </tr>
+         <tr>
+            <td colspan="5">
+                <a href="#" class="btn btn-success float-right ml-2">Finalizar compra</a>
+                <a href="/" class="btn btn-primary float-right">Seguir comprando</a>
+              
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5" class="align-items-right">
+                <a href="{% url 'store:eliminar_carrito'%}" class="btn btn-danger">Vaciar carrito</a>
+            </td>
+        </tr>
+        
+        {% endif %}
+        
+        </tbody>
+    </table>
+
+        </div>
+    </div>
+{% endblock %}

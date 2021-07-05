@@ -1,0 +1,49 @@
+{% extends "template.html" %}
+{% load categorias %}
+{% load static %} {% block head %}
+<title>Jaguarete KAA - Producto</title>
+{% endblock %} {% block body %}
+
+<h1 class="text-center mb-5">Detalle del producto</h1>
+<div class="container justify-content-center">
+<div class="card mb-3" style="max-width: 1080px">
+  <div class="row g-0">
+    <div class="col-md-4 text-center">
+      <img style="
+        width: 350px; height:350px;" src="{{object.imagen.url}}" alt="..." />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body text-center">
+        <h5 class="card-title">{{object.titulo}}</h5>
+        <p class="card-text">
+          {{object.categoria_base}}
+        </p>
+        <p class="card-text">
+          {{object.detalle}}
+        </p>
+        <p class="card-text">
+          Precio: ${{object.precio}} ARS
+        </p>
+        <p class="card-text">
+          <small class="text-muted">Creado: {{object.fecha_creacion}}
+          </small>
+        </p>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'store:agregar_al_carrito' pk=object.id%}"><button class="btn btn-primary text-center">Agregar al carrito</button></a>
+        {% else %}
+        <p class="my-2">Ir al</p>
+        <a href="{% url 'store:login'%}"><button class="btn btn-success text-center">Log in</button></a>
+        <p class="my-2">para comprar</p>
+        {% endif %}
+        {% if request.user.is_authenticated and  perms.jaguarete01.can_add_productos %}
+        <a href="{% url 'store:actualizar_producto' pk=object.id%}"><button class="btn btn-warning text-center">Editar producto</button></a>
+        {% endif %}
+        {% if request.user.is_authenticated and  perms.jaguarete01.can_add_productos %}
+        <a href="{% url 'store:eliminar_producto' pk=object.id%}"><button class="btn btn-danger text-center">Eliminar producto</button></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
